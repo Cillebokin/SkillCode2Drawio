@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Draw.io Direct"
+  short_description: "Generate native .drawio files directly from code analysis."
+  default_prompt: "Use $code-drawio-direct to analyze this code path and generate a native .drawio flowchart file."

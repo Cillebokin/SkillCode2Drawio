@@ -1,0 +1,27 @@
+{
+  "title": "API Retry Flow",
+  "summary": "Calls an external API with up to 3 retries and exponential backoff. Demonstrates loop-back routing and barycenter layout.",
+  "direction": "TD",
+  "nodes": [
+    { "id": "start",     "label": "Request",           "kind": "start" },
+    { "id": "init",      "label": "attempt = 0",       "kind": "process" },
+    { "id": "call",      "label": "Call API",          "kind": "external" },
+    { "id": "ok",        "label": "Response OK?",      "kind": "decision" },
+    { "id": "check",     "label": "attempt < 3?",      "kind": "decision" },
+    { "id": "sleep",     "label": "Sleep 2^attempt",   "kind": "process" },
+    { "id": "incr",      "label": "attempt += 1",      "kind": "process" },
+    { "id": "give_up",   "label": "Throw RetryError",  "kind": "end" },
+    { "id": "success",   "label": "Return payload",    "kind": "end" }
+  ],
+  "edges": [
+    { "source": "start", "target": "init" },
+    { "source": "init",  "target": "call" },
+    { "source": "call",  "target": "ok" },
+    { "source": "ok",    "target": "success", "label": "yes" },
+    { "source": "ok",    "target": "check",   "label": "no" },
+    { "source": "check", "target": "give_up", "label": "no", "route": "side" },
+    { "source": "check", "target": "sleep",   "label": "yes" },
+    { "source": "sleep", "target": "incr" },
+    { "source": "incr",  "target": "call",    "label": "retry", "loop": true }
+  ]
+}
