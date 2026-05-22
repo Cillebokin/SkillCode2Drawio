@@ -105,6 +105,7 @@ drawio -x -f png -e -b 10 -o login-flow.drawio.png login-flow.drawio
 - 保留 `.diagram.json`，后续代码变化时可以基于它重新生成 `.drawio`。
 - 对重试、轮询、状态机回跳等路径，优先使用 `loop: true` 或 `route: "side"`。
 
-## License
+```
+使用 $code-drawio-direct 分析现在的XXXX的代码逻辑，直接生成XXXX.drawio。
+```
 
-请根据你的发布需求补充许可证信息。
