@@ -1,0 +1,43 @@
+{
+  "title": "Order Model",
+  "summary": "Example class diagram for demonstrating ownership and association edges.",
+  "direction": "LR",
+  "types": [
+    {
+      "id": "order",
+      "name": "Order",
+      "kind": "class",
+      "namespace": "domain",
+      "fields": [
+        { "name": "id", "type": "OrderId", "visibility": "-" },
+        { "name": "items", "type": "List<OrderItem>", "visibility": "-" },
+        { "name": "customer", "type": "Customer", "visibility": "-" }
+      ],
+      "methods": [
+        { "name": "addItem", "parameters": ["sku: Sku", "quantity: int"], "returnType": "void", "visibility": "+" },
+        { "name": "total", "returnType": "Money", "visibility": "+" }
+      ]
+    },
+    {
+      "id": "order_item",
+      "name": "OrderItem",
+      "kind": "class",
+      "fields": [
+        { "name": "sku", "type": "Sku", "visibility": "-" },
+        { "name": "quantity", "type": "int", "visibility": "-" }
+      ]
+    },
+    {
+      "id": "customer",
+      "name": "Customer",
+      "kind": "class",
+      "fields": [
+        { "name": "id", "type": "CustomerId", "visibility": "-" }
+      ]
+    }
+  ],
+  "relationships": [
+    { "source": "order", "target": "order_item", "type": "composition", "label": "items", "targetMultiplicity": "*" },
+    { "source": "order", "target": "customer", "type": "association", "label": "customer", "targetMultiplicity": "1" }
+  ]
+}

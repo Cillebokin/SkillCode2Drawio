@@ -1,0 +1,68 @@
+{
+  "title": "Project Data Structures",
+  "direction": "LR",
+  "pages": [
+    {
+      "title": "01 Core Model",
+      "types": [
+        {
+          "id": "order",
+          "name": "订单",
+          "kind": "class",
+          "namespace": "domain",
+          "fields": [
+            { "name": "items", "type": "List<OrderItem>", "visibility": "-" }
+          ],
+          "methods": [
+            {
+              "name": "addItem",
+              "parameters": [
+                { "name": "sku", "type": "Sku" },
+                { "name": "数量", "type": "int", "default": "1" }
+              ],
+              "returnType": "void",
+              "visibility": "+"
+            }
+          ]
+        },
+        {
+          "id": "order_item",
+          "name": "OrderItem",
+          "kind": "class",
+          "fields": [
+            { "name": "sku", "type": "Sku", "visibility": "-" },
+            { "name": "quantity", "type": "int", "visibility": "-" }
+          ]
+        }
+      ],
+      "relationships": [
+        { "source": "order", "target": "order_item", "type": "composition", "label": "items", "targetMultiplicity": "*" }
+      ]
+    },
+    {
+      "title": "02 UI State",
+      "direction": "TD",
+      "types": [
+        {
+          "id": "view_state",
+          "name": "ViewState",
+          "kind": "record",
+          "fields": [
+            { "name": "filter", "type": "FilterState", "visibility": "-" }
+          ]
+        },
+        {
+          "id": "filter_state",
+          "name": "筛选状态",
+          "kind": "dto",
+          "fields": [
+            { "name": "关键字", "type": "String", "visibility": "-" }
+          ]
+        }
+      ],
+      "relationships": [
+        { "source": "view_state", "target": "filter_state", "type": "association", "label": "filter" }
+      ]
+    }
+  ]
+}

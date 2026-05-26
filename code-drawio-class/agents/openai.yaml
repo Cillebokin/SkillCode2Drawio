@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Draw.io Class"
+  short_description: "Generate draw.io class diagrams."
+  default_prompt: "Use $code-drawio-class to analyze code data structures and generate a native .drawio class diagram."
